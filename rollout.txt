@@ -1,0 +1,2 @@
+kubectl edit deployment nginx-app
+kubectl rollout undo deployment nginx-app --to-revision=1 1

@@ -1,0 +1,2 @@
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM               STORAGECLASS   REASON   AGE
+pvc-7f000ced-4b69-11ea-8239-42010a800207   20Gi       RWO            Delete           Bound    default/mysql-pvc   standard                127m

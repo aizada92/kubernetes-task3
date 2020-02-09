@@ -4,11 +4,11 @@ metadata:
   name: env-demo-pod
 spec:
   containers:
-  - name: ubuntu
-    image: ubuntu
+  - name: nginx
+    image: nginx
     env:
-    - name: GREETING
-      value: "NGINX"
+    - name:  NGINX_PORT
+      value: “80"
     - name: MESSAGE
       value: "PORT=80"
     command:

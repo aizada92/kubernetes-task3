@@ -4,14 +4,13 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    run: nginx-deploy
-  name: nginx-deploy
+    run: webapp
+  name: webapp
 spec:
-  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      run: nginx
+      run: webapp
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,10 +19,10 @@ spec:
   template:
     metadata:
       labels:
-        run: nginx
+        run: webapp
     spec:
       containers:
       - image: nginx:1.11.3
         imagePullPolicy: Always
-        name: nginx
+        name: webapp
         

@@ -1,39 +1,38 @@
+
 apiVersion: extensions/v1beta1
-kind: ReplicaSet
-metadata:
+kind: ReplicaSet 
+metadata: 
+  labels: 
+    run: wordpress-deployment
+    app: backend
   name: mysql-rs
-  labels:
-    app: mysql-rs
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mysql-rs-pod
-  template:
-    metadata:
-      labels:
-        app: mysql-rs-pod
-    spec:
-      volumes:
-      - name: mysql-pvc
-        persistentVolumeClaim:
-          claimName: mysql-pvc
-      containers:
-      - name: mysql
-        image: mysql:5.6
+spec:  
+  replicas: 1 
+  selector:  
+    matchLabels: 
+      app: backend
+      run: wordpress-deployment
+  template:  
+    metadata: 
+      labels:  
+        app: backend
+        run: wordpress-deployment
+    spec:  
+      containers:  
+      - image: mysql
+        name: mysql-deployments
         env:
-          # Test, use secret in prod
         - name: MYSQL_ROOT_PASSWORD
-          value: MyV3ryS3curePa55
-        livenessProbe:
-          tcpSocket:
-            port: 3306
-        ports:
+          valueFrom: 
+            secretKeyRef: 
+              name: mysql-credentials  
+              key: credential 
+        ports:  
         - containerPort: 3306
         volumeMounts:
-        - name: mysql-pvc
+        - name: mypv
           mountPath: /var/lib/mysql
-
-
-
-
+      volumes:
+      - name: mypv        
+        persistentVolumeClaim:
+          claimName: mypvc        
